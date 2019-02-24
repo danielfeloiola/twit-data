@@ -34,8 +34,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///twitterdata.db")
-
+db = SQL("postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i")
 
 @app.route("/")
 @login_required
@@ -185,7 +184,7 @@ def register():
         # get keys
         c_key = request.form.get("consumer_key")
         c_secret = request.form.get("consumer_secret")
-        a_token = equest.form.get("access_token")
+        a_token = request.form.get("access_token")
         a_secret = request.form.get("access_secret")
 
         # try to add user to database

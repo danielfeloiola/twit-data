@@ -12,7 +12,7 @@ import re
 import tweepy
 
 # configura o banco de dados
-db = SQL("sqlite:///twitterdata.db")
+db = SQL("postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i")
 
 #cria os mapas
 tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
