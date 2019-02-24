@@ -1,6 +1,6 @@
 import os
 
-from cs50 import SQL
+#from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
@@ -37,7 +37,10 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i")
+#db = SQL("postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i")
+
+engine = "postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i"
+db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 @login_required
