@@ -66,8 +66,8 @@ def check():
 @app.route("/trends")
 @login_required
 def trends():
-    """Show map with local trending topics"""######################################################
-    # NEEDS FIX: THE TRENDS LIST IS NOT THE SAME FROM THE TWITTER SITE. WHY?
+    """Show map with local trending topics"""
+    # NEEDS FIX: THE TRENDS LIST IS NOT THE SAME FROM THE TWITTER SITE.
     trends_map()
     return render_template("trends.html")
 
