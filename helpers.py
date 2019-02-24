@@ -9,7 +9,6 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import folium
 import re
-import config
 import tweepy
 
 # configura o banco de dados
