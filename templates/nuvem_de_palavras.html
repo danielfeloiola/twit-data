@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Nuvem
+{% endblock %}
+
+{% block main %}
+    <div>
+        <img src="{{url_for('static', filename="nuvem.png" )}}"/>
+        <p></p>
+        <p>{{frase}}</p>
+        <p>{{frase2}}</p>
+        <p>{{frase3}}</p>
+        <p>{{frase4}}</p>
+
+    </div>
+{% endblock %}

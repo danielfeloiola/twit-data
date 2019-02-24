@@ -1,0 +1,9 @@
+cs50
+Flask
+Flask-Session
+requests
+tweepy
+wordcloud
+matplotlib
+folium
+re

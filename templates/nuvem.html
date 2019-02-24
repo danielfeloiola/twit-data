@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Nuvem
+{% endblock %}
+
+{% block main %}
+    <form action="/nuvem" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="usuario" placeholder="Usuário" type="text">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Pesquisar</button>
+    </form>
+{% endblock %}

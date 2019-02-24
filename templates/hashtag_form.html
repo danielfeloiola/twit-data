@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Hashtags
+{% endblock %}
+
+{% block main %}
+    <form action="/hashtags" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="hashtag" placeholder="Hashtag" type="text">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Pesquisar</button>
+    </form>
+{% endblock %}
