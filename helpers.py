@@ -1,3 +1,5 @@
+import os
+
 import requests
 import urllib.parse
 from flask import redirect, render_template, request, session, send_file
@@ -11,8 +13,23 @@ import folium
 import re
 import tweepy
 
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+
+#if not os.getenv("postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i"):
+#    raise RuntimeError("DATABASE_URL is not set")
+
+engine = "postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i"
+db = scoped_session(sessionmaker(bind=engine))
+
+#db.execute("INSERT INTO books VALUES (1, 1, 1, 1)")
+#db.commit()
+
+
+
 # configura o banco de dados
-db = SQL("postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i")
+#db = SQL("postgres://tjgjscbrzpgexl:b2385bf5ba78252b0d910e8398f35d42a18db9578f5c254718598346bfea0815@ec2-54-227-246-152.compute-1.amazonaws.com:5432/d8na5t6e3e527i")
 
 #cria os mapas
 tweet_map = folium.Map(location=[-12, -49], zoom_start=4)

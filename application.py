@@ -7,6 +7,9 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+
 from helpers import apology, login_required
 from helpers import tweet_map, mapa_hashtags, mapa_trends, hashtag_map, trends_map, tweets_map, nuvem_de_palavras
 
@@ -195,6 +198,8 @@ def register():
                           c_secret = c_secret,
                           a_token = a_token,
                           a_secret = a_secret)
+        db.commit()
+
         if not result:
             return apology("username already exists", 403)
 
