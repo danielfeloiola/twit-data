@@ -1,19 +1,13 @@
-#import os
-
-#from flask import Flask, flash, jsonify, redirect, render_template, request, session
-#from flask_session import Session
-#from flask_sqlalchemy import SQLAlchemy
-#from tempfile import mkdtemp
-#from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
-#from werkzeug.security import check_password_hash, generate_password_hash
-
-from helpers import apology, login_required
-#from helpers import tweet_map, mapa_hashtags, mapa_trends, hashtag_map, trends_map, tweets_map, nuvem_de_palavras
-
 import os
 
 import requests
 import urllib.parse
+import matplotlib.pyplot as plt
+import folium
+import re
+import tweepy
+
+from wordcloud import WordCloud
 from functools import wraps
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, send_file
 from flask_session import Session
@@ -22,11 +16,14 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-import folium
-import re
-import tweepy
+from helpers import apology, login_required
+#from helpers import tweet_map, mapa_hashtags, mapa_trends, hashtag_map, trends_map, tweets_map, nuvem_de_palavras
+
+#cria os mapas
+tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
+mapa_hashtags = folium.Map(location=[-12, -49], zoom_start=4)
+mapa_trends = folium.Map(location=[-12, -49], zoom_start=3)
+
 
 # Configure application
 app = Flask(__name__)
@@ -76,11 +73,6 @@ app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
-#cria os mapas
-tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
-mapa_hashtags = folium.Map(location=[-12, -49], zoom_start=4)
-mapa_trends = folium.Map(location=[-12, -49], zoom_start=3)
 
 
 @app.route("/")
@@ -234,20 +226,24 @@ def register():
         a_token = request.form.get("access_token")
         a_secret = request.form.get("access_secret")
 
-        # try to add user to database
-        new_user = User(username, hash_password, c_key, c_secret, a_token, a_secret)
-        db.session.add(new_user)
-        db.session.commit()
+        usern = User.query.filter_by(username=request.form.get("username")).first()
+
+        if not usern:
+            # try to add user to database
+            new_user = User(username, hash_password, c_key, c_secret, a_token, a_secret)
+            db.session.add(new_user)
+            db.session.commit()
+
+        else:
+            return apology("username already exists", 403)
+
 
         usr = User.query.filter_by(username=request.form.get("username")).first()
-
         x = usr.check_password(request.form.get("password"))
 
         if x == True:
             # Remember which user has logged in
             session["user_id"] = usr.id
-        else:
-            return apology("username already exists", 403)
 
         # Redirect user to home page
         return redirect("/")
