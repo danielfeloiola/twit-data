@@ -128,15 +128,14 @@ def login():
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
-
+        # query database to check if user exists
         usr = User.query.filter_by(username=request.form.get("username")).first()
-
         x = usr.check_password(request.form.get("password"))
 
+        # if the passwords match, do the login
         if x == True:
-            # Remember which user has logged in
             session["user_id"] = usr.id
-        elif x == False:
+        else:
             return apology("invalid username and/or password", 403)
 
         # Redirect user to home page
@@ -226,21 +225,22 @@ def register():
         a_token = request.form.get("access_token")
         a_secret = request.form.get("access_secret")
 
+        # query to check if the username already exists
         usern = User.query.filter_by(username=request.form.get("username")).first()
 
+        # if its a unique udername add user to database, if its not generate error
         if not usern:
-            # try to add user to database
             new_user = User(username, hash_password, c_key, c_secret, a_token, a_secret)
             db.session.add(new_user)
             db.session.commit()
-
         else:
             return apology("username already exists", 403)
 
-
+        # query again for login
         usr = User.query.filter_by(username=request.form.get("username")).first()
         x = usr.check_password(request.form.get("password"))
 
+        # do the login chacking for password
         if x == True:
             # Remember which user has logged in
             session["user_id"] = usr.id
