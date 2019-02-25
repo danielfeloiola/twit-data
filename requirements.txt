@@ -6,4 +6,6 @@ tweepy
 wordcloud
 matplotlib
 folium
-
+flask_sqlalchemy
+gunicorn
+psycopg2
