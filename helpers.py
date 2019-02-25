@@ -2,8 +2,12 @@ import os
 
 import requests
 import urllib.parse
-from flask import redirect, render_template, request, session, send_file
-from functools import wraps
+from functools import wrapsfrom flask import Flask, flash, jsonify, redirect, render_template, request, session, send_file
+from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
+from tempfile import mkdtemp
+from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
@@ -11,34 +15,19 @@ import folium
 import re
 import tweepy
 
-from flask_sqlalchemy import SQLAlchemy
-
-
-import os
-
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
-from flask_session import Session
-from tempfile import mkdtemp
-from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
-from werkzeug.security import check_password_hash, generate_password_hash
-
-from flask_sqlalchemy import SQLAlchemy
-
 
 #cria os mapas
 tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
 mapa_hashtags = folium.Map(location=[-12, -49], zoom_start=4)
 mapa_trends = folium.Map(location=[-12, -49], zoom_start=3)
 
+
 # Configure application
 app = Flask(__name__)
-
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-
 db = SQLAlchemy(app)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
