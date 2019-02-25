@@ -2,7 +2,8 @@ import os
 
 import requests
 import urllib.parse
-from functools import wrapsfrom flask import Flask, flash, jsonify, redirect, render_template, request, session, send_file
+from functools import wraps
+from flask import Flask, flash, jsonify, redirect, render_template, request, session, send_file
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from tempfile import mkdtemp
