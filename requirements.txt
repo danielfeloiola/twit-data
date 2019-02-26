@@ -9,4 +9,3 @@ folium
 gunicorn
 psycopg2
 flask_sqlalchemy
-redis
