@@ -20,9 +20,6 @@ from helpers import apology, login_required
 #from helpers import tweet_map, mapa_hashtags, mapa_trends, hashtag_map, trends_map, tweets_map, nuvem_de_palavras
 
 
-# testing redis for the login issue
-import redis
-
 #cria os mapas
 tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
 mapa_hashtags = folium.Map(location=[-12, -49], zoom_start=4)
