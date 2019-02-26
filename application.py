@@ -70,12 +70,12 @@ def after_request(response):
 
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
+#app.config["SESSION_FILE_DIR"] = mkdtemp()
+#app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 
 
-app.config['SECRET_KEY'] = "shdulhdfsluhlf"
+app.config['SECRET_KEY'] = "shdulhdkj48fsluhlf"
 
 
 Session(app)
