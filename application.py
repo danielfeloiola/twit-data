@@ -75,7 +75,7 @@ def after_request(response):
 app.config["SESSION_TYPE"] = "filesystem"
 
 
-app.config['SECRET_KEY'] = "shdulhdkj48fsluhlf"
+#app.config['SECRET_KEY'] = "shdulhdkj48fsluhlf"
 
 
 Session(app)
