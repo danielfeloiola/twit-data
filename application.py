@@ -66,7 +66,7 @@ def after_request(response):
 
 # Configure session to use filesystem (instead of signed cookies)
 #app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False #reativado para um teste
+app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config['SECRET_KEY'] = "shdulhdkj48fslu45jvkawinveohlf"
 Session(app)
@@ -316,7 +316,7 @@ def hashtag_map(hashtag):
     api = tweepy.API(auth)
 
     # Call API to get the tweets
-    tweets = tweepy.Cursor(api.search, q=hashtag, wait_on_rate_limit=True).items(1000)
+    tweets = tweepy.Cursor(api.search, q=hashtag).items(1000) #, wait_on_rate_limit=True
 
     #listas de coordenadas e nomes de cidades
     lista_de_coordenadas = []
