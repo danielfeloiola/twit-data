@@ -1,12 +1,10 @@
 import os
-
 import requests
 import urllib.parse
 import matplotlib.pyplot as plt
 import folium
 import re
 import tweepy
-
 from wordcloud import WordCloud
 from functools import wraps
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, send_file
@@ -15,9 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from helpers import apology, login_required
-#from helpers import tweet_map, mapa_hashtags, mapa_trends, hashtag_map, trends_map, tweets_map, nuvem_de_palavras
 
 
 #cria os mapas
@@ -34,6 +30,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
+# Creates a class for the sqlalchemy database
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -42,7 +39,6 @@ class User(db.Model):
     c_secret = db.Column(db.String(50), unique=True, nullable=False)
     a_token = db.Column(db.String(50), unique=True, nullable=False)
     a_secret = db.Column(db.String(45), unique=True, nullable=False)
-
 
     def __init__(self, username, hashp, c_key, c_secret, a_token, a_secret):
         self.username = username
@@ -70,9 +66,9 @@ def after_request(response):
 
 # Configure session to use filesystem (instead of signed cookies)
 #app.config["SESSION_FILE_DIR"] = mkdtemp()
-#app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = False #reativado para um teste
 app.config["SESSION_TYPE"] = "filesystem"
-app.config['SECRET_KEY'] = "shdulhdkj48fsluhlf"
+app.config['SECRET_KEY'] = "shdulhdkj48fslu45jvkawinveohlf"
 Session(app)
 
 
@@ -290,8 +286,6 @@ def hastag_map_render():
     return mapa_hashtags.get_root().render()
 
 
-
-
 def errorhandler(e):
     """Handle error"""
     if not isinstance(e, HTTPException):
@@ -304,16 +298,12 @@ for code in default_exceptions:
 
 
 
-
-
-
 ####################################################
 # funcoes que geram os mapas
 def hashtag_map(hashtag):
     '''Faz um mapa mostrando onde hashtags foram usadas'''
 
     #cria uma api do twitter
-
     usr = User.query.filter_by(id=session["user_id"]).first()
 
     consumer_key = usr.c_key
@@ -324,7 +314,6 @@ def hashtag_map(hashtag):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
-
 
     # Call API to get the tweets
     tweets = tweepy.Cursor(api.search, q=hashtag, wait_on_rate_limit=True).items(1000)
@@ -354,7 +343,6 @@ def trends_map():
     ''' Mostra trending topics locais '''
 
     #cria uma api do twitter
-
     usr = User.query.filter_by(id=session["user_id"]).first()
 
     consumer_key = usr.c_key
@@ -428,16 +416,21 @@ def trends_map():
             trends.append(trends_de_verdade[num]['name'])
 
         #coloca os marcadores no mapa
-        folium.Marker(lista_de_coordenadas[i], popup=trends[i] + '<br>' + trends[i+1] +  '<br>' + trends[i+2]  +  '<br>' + trends[i+3] + '<br>' + trends[i+4] + '<br>' + trends[i+5] +  '<br>' + trends[i+6] + '<br>' + trends[i+7] + '<br>' + trends[i+8] + '<br>' + trends[i+9] + '<br>' + trends[i+10] + '<br>' + trends[i+11] + '<br>' + trends[i+12] + '<br>' + trends[i+13] + '<br>' + trends[i+14] + '<br>' + trends[i+15] + '<br>' + trends[i+16] + '<br>' + trends[i+17] + '<br>' + trends[i+18] + '<br>' + trends[i+19]).add_to(mapa_trends)
+        folium.Marker(lista_de_coordenadas[i],
+        popup = trends[i] + '<br>' + trends[i+1] +  '<br>' + trends[i+2]  +  '<br>'
+        + trends[i+3] + '<br>' + trends[i+4] + '<br>' + trends[i+5] +  '<br>'
+        + trends[i+6] + '<br>' + trends[i+7] + '<br>' + trends[i+8] + '<br>'
+        + trends[i+9] + '<br>' + trends[i+10] + '<br>' + trends[i+11] + '<br>'
+        + trends[i+12] + '<br>' + trends[i+13] + '<br>' + trends[i+14] + '<br>'
+        + trends[i+15] + '<br>' + trends[i+16] + '<br>' + trends[i+17] + '<br>'
+        + trends[i+18] + '<br>' + trends[i+19]).add_to(mapa_trends)
 
 
 def tweets_map(usuario):
     ''' Mostra os tweets geolocalizados de um usuário em um mapa '''
 
     #cria uma api do twitter
-
     usr = User.query.filter_by(id=session["user_id"]).first()
-
 
     consumer_key = usr.c_key
     consumer_secret = usr.c_secret
@@ -495,7 +488,6 @@ def nuvem_de_palavras(usuario):
     '''Mostra alguns dados de um perfil do twitter e faz uma nuvem de palavras'''
 
     #cria uma api do twitter
-
     usr = User.query.filter_by(id=session["user_id"]).first()
 
     consumer_key = usr.c_key
@@ -507,9 +499,10 @@ def nuvem_de_palavras(usuario):
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
 
-
+    # le as stopwords de um arquivo no diretorio
     stopwords =  open("stopwords-br.txt","r").read()
 
+    # cria uma string vazia para adicionar os tweets
     string = ''
 
     # pega a timeline de um usuário
@@ -555,5 +548,6 @@ def nuvem_de_palavras(usuario):
     frase3 = f'A descrição do {usuario} é: {descricao}'
     frase4 = f'O site do {usuario} é: {site}'
 
+    # the end
     return frase, frase2, frase3, frase4, nuvem
 
