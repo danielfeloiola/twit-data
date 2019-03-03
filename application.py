@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import folium
 import re
 import tweepy
+import branca
+from folium import IFrame
 from wordcloud import WordCloud
 from functools import wraps
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, send_file
@@ -258,7 +260,14 @@ def hashtags():
     # User reached route via POST
     if request.method == "POST":
         hashtag = request.form.get("hashtag")
-        hashtag_map(hashtag)
+
+        try:
+        # Some tweepy api call, ex) api.get_user(screen_name = usrScreenName)
+            hashtag_map(hashtag)
+        except tweepy.TweepError as e:
+            #print(e.reason)
+            return apology("Tweepy Error", e.reason[-3:])
+
         return render_template("hashtag_map.html")
 
     # if the user is looking for the form
@@ -318,12 +327,16 @@ def hashtag_map(hashtag):
     # Call API to get the tweets
     tweets = tweepy.Cursor(api.search, q=hashtag).items(1000) #, wait_on_rate_limit=True
 
+    #file = open("tweets.txt", "r")
+    #tweets = file.read()
+
     #listas de coordenadas e nomes de cidades
     lista_de_coordenadas = []
 
     #esse comentario e completamente inutil
     for tweet in tweets:
 
+        # Se eocontrarmos dadso de geolocalizacao no tweet
         if tweet.place != None:
             dados_lugar = tweet.place
             box = dados_lugar.bounding_box
@@ -331,12 +344,23 @@ def hashtag_map(hashtag):
             coords = coordenadas[0]
             coordenadas_agora_vai = coords[0]
             coordenadas_agora_vai.reverse()
-            lista_de_coordenadas.append(coordenadas_agora_vai)
 
-    #reitera pela lista de lugares e adiciona os marcadores
-    numero = len(lista_de_coordenadas)
-    for i in range(numero):
-        folium.RegularPolygonMarker(lista_de_coordenadas[i],fill_color='#769d96',number_of_sides=8,radius=5).add_to(mapa_hashtags)
+            # URL to get a embeddable version of the tweet
+            url = 'https://publish.twitter.com/oembed?url=https://twitter.com/'+ tweet.user.screen_name +'/status/' + tweet.id_str
+
+            # Get the embedable HTML out of the json
+            twt_embed = requests.get(url)
+            twt_json = twt_embed.json()
+            twt_html = twt_json['html']
+
+            # Add to the iframe
+            iframe = branca.element.IFrame(twt_html, width=300, height=400) # width=400, height=500
+
+            # Make a folium popup
+            popup = folium.Popup(iframe, parse_html=True, max_width=500)
+
+            # Add marker to the map
+            folium.Marker(coordenadas_agora_vai, popup = popup).add_to(mapa_hashtags)
 
 
 def trends_map():
