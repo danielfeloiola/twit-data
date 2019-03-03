@@ -86,11 +86,13 @@ def index():
 def tweets():
     """Show the map with the user tweets"""
 
-    # Restart the map
-    tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
 
     # Make map
     if request.method == "POST":
+
+        # Restart the map
+        tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
+
         usuario = request.form.get("usuario")
         mapa = tweets_map(usuario)
         return render_template("tweets_map.html")
