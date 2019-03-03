@@ -87,7 +87,7 @@ def tweets():
     """Show the map with the user tweets"""
 
     if request.method == "POST":
-        usuario = request.form.get("usuario")
+        usuario = request.form.get("usr_search")
         mapa = tweets_map(usuario)
         return render_template("tweets_map.html")
     else:
