@@ -87,7 +87,6 @@ def tweets():
     """Show the map with the user tweets"""
 
     if request.method == "POST":
-
         usuario = request.form.get("usuario")
         mapa = tweets_map(usuario)
         return render_template("tweets_map.html")
@@ -339,10 +338,7 @@ def hashtag_map(hashtag):
     api = tweepy.API(auth)
 
     # Call API to get the tweets
-    tweets = tweepy.Cursor(api.search, q=hashtag).items(1000) #, wait_on_rate_limit=True
-
-    #file = open("tweets.txt", "r")
-    #tweets = file.read()
+    tweets = tweepy.Cursor(api.search, q=hashtag).items(800) #, wait_on_rate_limit=True
 
     #listas de coordenadas e nomes de cidades
     lista_de_coordenadas = []
