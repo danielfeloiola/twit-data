@@ -171,7 +171,7 @@ def nuvem():
 
     # User reached route via POST
     if request.method == "POST":
-        usuario = request.form.get("usuario")
+        usuario = request.form.get("usr_nv")
         frase, frase2, frase3, frase4, nuvem = nuvem_de_palavras(usuario)
         return render_template("nuvem_de_palavras.html",
                                 frase = frase,
