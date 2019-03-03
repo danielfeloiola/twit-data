@@ -96,7 +96,7 @@ def tweets():
     else:
 
         # Restart the map
-        tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
+        tweet_map = folium.Map()
 
         return render_template("tweets.html")
 
