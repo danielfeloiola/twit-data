@@ -109,8 +109,8 @@ def trends():
     try:
         # tweepy function call
         trends_map()
-    except tweepy.TweepError as e:
-        return apology("Tweepy Error", e.reason[-3:])
+    except tweepy.TweepError:
+        return apology("Tweepy Error")
 
     return render_template("trends.html")
 
