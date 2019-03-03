@@ -91,7 +91,7 @@ def tweets():
     if request.method == "POST":
 
         # Restart the map
-        tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
+        #tweet_map = folium.Map(location=[-12, -49], zoom_start=4)
 
         usuario = request.form.get("usuario")
         mapa = tweets_map(usuario)
@@ -112,7 +112,7 @@ def trends():
     """Show map with local trending topics"""
     # NEEDS FIX: THE TRENDS LIST IS NOT THE SAME FROM THE TWITTER SITE.
 
-    mapa_trends = folium.Map(location=[-12, -49], zoom_start=3)
+    #mapa_trends = folium.Map(location=[-12, -49], zoom_start=3)
 
     try:
         # tweepy function call
@@ -276,7 +276,7 @@ def hashtags():
     if request.method == "POST":
 
         # Restart map
-        mapa_hashtags = folium.Map(location=[-12, -49], zoom_start=4)
+        #mapa_hashtags = folium.Map(location=[-12, -49], zoom_start=4)
 
         # Get the hashtag
         hashtag = request.form.get("hashtag")
