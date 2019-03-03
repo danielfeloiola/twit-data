@@ -40,17 +40,38 @@ main
     text-align: center;
 
     /* push footer to the bottom of the page*/
-    height: 680px;
+    height: 100%;
 
     width: 100%;
+
+    margin: 0px;
+
+    padding: 0px;
 }
+
+form
+{
+    /*position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);*/
+}
+
+html,body
+{
+    height:93%;
+}
+/*A div abaixo ocupara 100% da altura do "container" onde foi inserida*/
+
 
 div
 {
     height: 100%;
 
     width: 100%;
+
 }
+
 
 main img
 {

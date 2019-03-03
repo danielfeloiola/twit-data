@@ -107,10 +107,9 @@ def trends():
     # NEEDS FIX: THE TRENDS LIST IS NOT THE SAME FROM THE TWITTER SITE.
 
     try:
-        # Some tweepy api call, ex) api.get_user(screen_name = usrScreenName)
+        # tweepy function call
         trends_map()
     except tweepy.TweepError as e:
-        #print(e.reason)
         return apology("Tweepy Error", e.reason[-3:])
 
     return render_template("trends.html")
