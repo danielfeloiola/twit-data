@@ -464,14 +464,14 @@ def trends_map():
         trends = sorted(trends, key=itemgetter(1), reverse=True)
 
         # coloca os marcadores no mapa
-        folium.Marker(lista_de_coordenadas[i], popup= trends[0][0] + '<br>'
-                                                    + trends[1][0] + '<br>'
-                                                    + trends[2][0] + '<br>'
-                                                    + trends[3][0] + '<br>'
-                                                    + trends[4][0] + '<br>'
-                                                    + trends[5][0] + '<br>'
-                                                    + trends[6][0] + '<br>'
-                                                    + trends[7][0]).add_to(mapa_trends)
+        folium.Marker(lista_de_coordenadas[i], popup= trends[0][0] + '  (' + str(trends[0][1]) + ' tweets) ' + '<br>'
+                                                    + trends[1][0] + '  (' + str(trends[1][1]) + ' tweets) ' + '<br>'
+                                                    + trends[2][0] + '  (' + str(trends[2][1]) + ' tweets) ' + '<br>'
+                                                    + trends[3][0] + '  (' + str(trends[3][1]) + ' tweets) ' + '<br>'
+                                                    + trends[4][0] + '  (' + str(trends[4][1]) + ' tweets) ' + '<br>'
+                                                    + trends[5][0] + '  (' + str(trends[5][1]) + ' tweets) ' + '<br>'
+                                                    + trends[6][0] + '  (' + str(trends[6][1]) + ' tweets) ' + '<br>'
+                                                    + trends[7][0] + '  (' + str(trends[7][1]) +' tweets) ').add_to(mapa_trends)
 
 
 def tweets_map(usuario):
