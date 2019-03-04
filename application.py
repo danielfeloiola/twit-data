@@ -434,7 +434,6 @@ def trends_map():
 
     # itera sobre as capitais pegando os trends de cada uma
     contador = len(lista_de_capitais)
-
     for i in range(contador):
 
         trends = []
@@ -442,22 +441,33 @@ def trends_map():
         #pede os trends
         status_list = api.trends_place(lista_de_woeids[i])
 
-        #pegas os trends e coloca na lista
+        #tira eles de dentro da primeira lista
         trending = status_list[0]
-        trends_de_verdade = trending['trends']
-        x = len(trends_de_verdade)
-        for num in range(x):
-            trends.append(trends_de_verdade[num]['name'])
 
-        #coloca os marcadores no mapa
-        folium.Marker(lista_de_coordenadas[i],
-        popup = trends[i] + '<br>' + trends[i+1] +  '<br>' + trends[i+2]  +  '<br>'
-        + trends[i+3] + '<br>' + trends[i+4] + '<br>' + trends[i+5] +  '<br>'
-        + trends[i+6] + '<br>' + trends[i+7] + '<br>' + trends[i+8] + '<br>'
-        + trends[i+9] + '<br>' + trends[i+10] + '<br>' + trends[i+11] + '<br>'
-        + trends[i+12] + '<br>' + trends[i+13] + '<br>' + trends[i+14] + '<br>'
-        + trends[i+15] + '<br>' + trends[i+16] + '<br>' + trends[i+17] + '<br>'
-        + trends[i+18] + '<br>' + trends[i+19]).add_to(mapa_trends)
+        #tira os trends de dentro de um dicionario
+        trends_de_verdade = trending['trends']
+
+        # calcula a quantidade de trends
+        x = len(trends_de_verdade)
+
+        # se houver dados de volume, coloca em uma tupla o trend e o volume
+        for num in range(x):
+            if trends_de_verdade[num]['tweet_volume'] is not None:
+                # e coloca a tupla na lista
+                trends.append((trends_de_verdade[num]['name'], trends_de_verdade[num]['tweet_volume']))
+
+        # coloca os tts em ordem decrescente do tweet_volume
+        trends = sorted(trends, key=itemgetter(1), reverse=True)
+
+        # coloca os marcadores no mapa
+        folium.Marker(lista_de_coordenadas[i], popup= trends[0][0] + '<br>'
+                                                    + trends[1][0] + '<br>'
+                                                    + trends[2][0] + '<br>'
+                                                    + trends[3][0] + '<br>'
+                                                    + trends[4][0] + '<br>'
+                                                    + trends[5][0] + '<br>'
+                                                    + trends[6][0] + '<br>'
+                                                    + trends[7][0]).add_to(mapa_trends)
 
 
 def tweets_map(usuario):
