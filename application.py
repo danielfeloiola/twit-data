@@ -9,20 +9,14 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from usr import User
 from helpers import apology, login_required
-from mappers import hashtag_map, trends_map, tweets_map, nuvem_de_palavras#, mp_tweet
+from mappers import hashtag_map, trends_map, tweets_map, nuvem_de_palavras
 
-from tempfile import mkdtemp
 
 # Configure application
 app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-#######
-#app.config["SESSION_FILE_DIR"] = mkdtemp()
-#app.config["SESSION_PERMANENT"] = False
-#app.config["SESSION_TYPE"] = "filesystem"
 
 
 # Ensure responses aren't cached
@@ -253,32 +247,6 @@ def hashtags():
         return render_template("hashtag_form.html")
 
 
-# Render functions
-@app.route("/mapatrends")
-@login_required
-def mapatrends():
-    """Render map"""
-
-    return mp_trends.get_root().render()
-    # return session['mp_trends'].get_root().render()
-
-@app.route("/tweets_map_renderer")
-@login_required
-def tweets_map_renderer():
-    """Render map"""
-
-    return mp_tweet.get_root().render()
-    # return session['mp_tweet'].get_root().render()
-
-@app.route("/hastag_map_render")
-@login_required
-def hastag_map_render():
-    """Render Map"""
-
-    return mp_hashtags.get_root().render()
-    #return session['mp_hashtags'].get_root().render()
-
-
 def errorhandler(e):
     """Handle error"""
     if not isinstance(e, HTTPException):
@@ -290,6 +258,13 @@ for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
 
 
+#######
+#app.config["SESSION_FILE_DIR"] = mkdtemp()
+#app.config["SESSION_PERMANENT"] = False
+#app.config["SESSION_TYPE"] = "filesystem"
+
+
+#from tempfile import mkdtemp
 
 #import requests
 #import urllib.parse
@@ -341,3 +316,30 @@ for code in default_exceptions:
 #session['mp_trends'] = folium.Map(location=[-12, -49], zoom_start=3)
 
 
+# Render functions
+#@app.route("/mapatrends")
+#@login_required
+#def mapatrends():
+#    """Render map"""
+#
+#    return mp_trends.get_root().render()
+#    # return session['mp_trends'].get_root().render()
+#
+#@app.route("/tweets_map_renderer")
+#@login_required
+#def tweets_map_renderer():
+#    """Render map"""
+#
+#    return mp_tweet.get_root().render()
+#    # return session['mp_tweet'].get_root().render()
+#
+#@app.route("/hastag_map_render")
+#@login_required
+#def hastag_map_render():
+#    """Render Map"""
+#
+#    return mp_hashtags.get_root().render()
+#    #return session['mp_hashtags'].get_root().render()
+#
+#
+#, mp_tweet
