@@ -6,7 +6,7 @@
 
 {% block main %}
     <div id="mapa">
-        <iframe src="/hastag_map_render" height=100% width=100%>
+        <iframe src="{{url_for('static', filename="mp_hashtags.html" )}}" height=100% width=100%>
         </iframe>
     </div>
 {% endblock %}

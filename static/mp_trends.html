@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS=false; L_NO_TOUCH=false; L_DISABLE_3D=false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>#map_1ab6f07d84e24785bcc22310ab47ccae {
+        position: relative;
+        width: 100.0%;
+        height: 100.0%;
+        left: 0.0%;
+        top: 0.0%;
+        }
+    </style>
+</head>
+<body>    
+    
+    <div class="folium-map" id="map_1ab6f07d84e24785bcc22310ab47ccae" ></div>
+</body>
+<script>    
+    
+    
+        var bounds = null;
+    
+
+    var map_1ab6f07d84e24785bcc22310ab47ccae = L.map(
+        'map_1ab6f07d84e24785bcc22310ab47ccae', {
+        center: [-12, -49],
+        zoom: 3,
+        maxBounds: bounds,
+        layers: [],
+        worldCopyJump: false,
+        crs: L.CRS.EPSG3857,
+        zoomControl: true,
+        });
+
+    
+    
+    var tile_layer_4707578c927f4ea4963e4ee0542a49ff = L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+}).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+    
+        var marker_501cabc729c14118a888720e966afebf = L.marker(
+            [-3.07, -61.66],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_e9c312ed7ac647c2a176b67fac23584f = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_6f736883f5f14fffbf9c09bf5c104e82 = $(`<div id="html_6f736883f5f14fffbf9c09bf5c104e82" style="width: 100.0%; height: 100.0%;">#WorldBookDay  (94468 tweets)<br>#CaptainMarvel  (93241 tweets)<br>Michael Jordan  (86188 tweets)<br>Two Of Us  (73801 tweets)<br>#TwoOfUsToday  (30810 tweets)<br>IM CRYING  (27965 tweets)<br>#GilmarfechadocomPaulopreto  (16952 tweets)<br>#QuintaDetremuraSDV  (10524 tweets)</div>`)[0];
+                popup_e9c312ed7ac647c2a176b67fac23584f.setContent(html_6f736883f5f14fffbf9c09bf5c104e82);
+            
+
+            marker_501cabc729c14118a888720e966afebf.bindPopup(popup_e9c312ed7ac647c2a176b67fac23584f)
+            ;
+
+            
+        
+    
+        var marker_bf4b8e8ca23b407e9d2df1f351ffa6db = L.marker(
+            [-12.96, -38.51],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_c04b625da840443db2a8d41322c76883 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_e74c6780397748e3ba1dfbc508ccdb4e = $(`<div id="html_e74c6780397748e3ba1dfbc508ccdb4e" style="width: 100.0%; height: 100.0%;">#BolsonaroTemRazão  (532196 tweets)<br>Mangueira  (421604 tweets)<br>Golden Shower  (266944 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>Nino  (79289 tweets)</div>`)[0];
+                popup_c04b625da840443db2a8d41322c76883.setContent(html_e74c6780397748e3ba1dfbc508ccdb4e);
+            
+
+            marker_bf4b8e8ca23b407e9d2df1f351ffa6db.bindPopup(popup_c04b625da840443db2a8d41322c76883)
+            ;
+
+            
+        
+    
+        var marker_d1e6439af6c84eb292bab27d41fbf2a4 = L.marker(
+            [-3.71, -38.54],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_4d8e836cb7e846d18e76e421aee41d50 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_aa81003e4b934552a9d5846019711110 = $(`<div id="html_aa81003e4b934552a9d5846019711110" style="width: 100.0%; height: 100.0%;">Carnaval  (1309042 tweets)<br>Presidente  (1198770 tweets)<br>#BolsonaroTemRazão  (532196 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>Two Of Us  (76186 tweets)</div>`)[0];
+                popup_4d8e836cb7e846d18e76e421aee41d50.setContent(html_aa81003e4b934552a9d5846019711110);
+            
+
+            marker_d1e6439af6c84eb292bab27d41fbf2a4.bindPopup(popup_4d8e836cb7e846d18e76e421aee41d50)
+            ;
+
+            
+        
+    
+        var marker_f3e9031197c841728461a666aa739aa6 = L.marker(
+            [-15.83, -47.86],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_cbea555ee1ba46b5ad4c42d3726a6737 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_4a7f352d2d7146dcace01caf087150c6 = $(`<div id="html_4a7f352d2d7146dcace01caf087150c6" style="width: 100.0%; height: 100.0%;">#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>Two Of Us  (76186 tweets)<br>#TwoOfUsToday  (33348 tweets)<br>IM CRYING  (28277 tweets)<br>#GilmarfechadocomPaulopreto  (17065 tweets)<br>#ImpeachmentGilmarMendes  (10653 tweets)</div>`)[0];
+                popup_cbea555ee1ba46b5ad4c42d3726a6737.setContent(html_4a7f352d2d7146dcace01caf087150c6);
+            
+
+            marker_f3e9031197c841728461a666aa739aa6.bindPopup(popup_cbea555ee1ba46b5ad4c42d3726a6737)
+            ;
+
+            
+        
+    
+        var marker_e4a31b5b112244e680a3f8946d6e9b55 = L.marker(
+            [-16.64, -49.31],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_168b187332be467798abca939139434c = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_e9846ca552fb4de0ab33445dec5e3090 = $(`<div id="html_e9846ca552fb4de0ab33445dec5e3090" style="width: 100.0%; height: 100.0%;">#BolsonaroTemRazão  (532196 tweets)<br>Mangueira  (421604 tweets)<br>Golden Shower  (266944 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>Anitta  (134742 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)</div>`)[0];
+                popup_168b187332be467798abca939139434c.setContent(html_e9846ca552fb4de0ab33445dec5e3090);
+            
+
+            marker_e4a31b5b112244e680a3f8946d6e9b55.bindPopup(popup_168b187332be467798abca939139434c)
+            ;
+
+            
+        
+    
+        var marker_b67e61bc9c5c46758074d546d36573db = L.marker(
+            [-2.55, -44.3],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_aaa7d82b8369415c86b0ac0316ce5267 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_76762933d7d14c5f9f12fad36fb97618 = $(`<div id="html_76762933d7d14c5f9f12fad36fb97618" style="width: 100.0%; height: 100.0%;">#BolsonaroTemRazão  (532196 tweets)<br>Mangueira  (421604 tweets)<br>Golden Shower  (266944 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>Two Of Us  (76186 tweets)</div>`)[0];
+                popup_aaa7d82b8369415c86b0ac0316ce5267.setContent(html_76762933d7d14c5f9f12fad36fb97618);
+            
+
+            marker_b67e61bc9c5c46758074d546d36573db.bindPopup(popup_aaa7d82b8369415c86b0ac0316ce5267)
+            ;
+
+            
+        
+    
+        var marker_27c0f9443c0846c4b04eaa9fe10fbb88 = L.marker(
+            [-18.1, -44.38],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_6240f613cb404c69891e6e2708b625e6 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_c776e3663d624b7ca8215d5215a7b836 = $(`<div id="html_c776e3663d624b7ca8215d5215a7b836" style="width: 100.0%; height: 100.0%;">Presidente  (1198770 tweets)<br>#BolsonaroTemRazão  (532196 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>Two Of Us  (76186 tweets)<br>#TwoOfUsToday  (33348 tweets)</div>`)[0];
+                popup_6240f613cb404c69891e6e2708b625e6.setContent(html_c776e3663d624b7ca8215d5215a7b836);
+            
+
+            marker_27c0f9443c0846c4b04eaa9fe10fbb88.bindPopup(popup_6240f613cb404c69891e6e2708b625e6)
+            ;
+
+            
+        
+    
+        var marker_3c4348b14a6547d6974e94dfd60394f1 = L.marker(
+            [-5.53, -52.29],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_ea0c170149bc4f0c92efadf060e7538c = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_51ba8910b107459781b4b9d89923c16f = $(`<div id="html_51ba8910b107459781b4b9d89923c16f" style="width: 100.0%; height: 100.0%;">#BolsonaroTemRazão  (532196 tweets)<br>Mangueira  (421604 tweets)<br>Golden Shower  (266944 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#ApuracaoRJ  (110198 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)</div>`)[0];
+                popup_ea0c170149bc4f0c92efadf060e7538c.setContent(html_51ba8910b107459781b4b9d89923c16f);
+            
+
+            marker_3c4348b14a6547d6974e94dfd60394f1.bindPopup(popup_ea0c170149bc4f0c92efadf060e7538c)
+            ;
+
+            
+        
+    
+        var marker_8d7b522f77d14d6b88d841ebdb90899f = L.marker(
+            [-24.89, -51.55],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_9b6c191c922b4ff089af6370b07ef78d = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_9fe00e76ee9f456b9cc65a10e859b396 = $(`<div id="html_9fe00e76ee9f456b9cc65a10e859b396" style="width: 100.0%; height: 100.0%;">#BolsonaroTemRazão  (532196 tweets)<br>Mangueira  (421604 tweets)<br>Golden Shower  (266944 tweets)<br>#TwoOfUs  (250330 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)</div>`)[0];
+                popup_9b6c191c922b4ff089af6370b07ef78d.setContent(html_9fe00e76ee9f456b9cc65a10e859b396);
+            
+
+            marker_8d7b522f77d14d6b88d841ebdb90899f.bindPopup(popup_9b6c191c922b4ff089af6370b07ef78d)
+            ;
+
+            
+        
+    
+        var marker_8cee26ef8d284f4ca14bc59c281c82f9 = L.marker(
+            [-8.28, -35.07],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_6d83692ab2a544f9a609658421e0729d = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_0004b0323a6540e1aff2d4623e6a86ce = $(`<div id="html_0004b0323a6540e1aff2d4623e6a86ce" style="width: 100.0%; height: 100.0%;">Presidente  (1198770 tweets)<br>#BolsonaroTemRazão  (532196 tweets)<br>Jesus  (301869 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>Two Of Us  (76186 tweets)</div>`)[0];
+                popup_6d83692ab2a544f9a609658421e0729d.setContent(html_0004b0323a6540e1aff2d4623e6a86ce);
+            
+
+            marker_8cee26ef8d284f4ca14bc59c281c82f9.bindPopup(popup_6d83692ab2a544f9a609658421e0729d)
+            ;
+
+            
+        
+    
+        var marker_98da4ef6bd5b468ea1151eff7bbc3383 = L.marker(
+            [-22.84, -43.15],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_93069c145d1541faa30ec2d5e4cb3970 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_ffa4df09663c4e7f944da9a874ab5f78 = $(`<div id="html_ffa4df09663c4e7f944da9a874ab5f78" style="width: 100.0%; height: 100.0%;">#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>Two Of Us  (76186 tweets)<br>#TwoOfUsToday  (33348 tweets)<br>IM CRYING  (28277 tweets)<br>#GilmarfechadocomPaulopreto  (17065 tweets)<br>#ImpeachmentGilmarMendes  (10653 tweets)</div>`)[0];
+                popup_93069c145d1541faa30ec2d5e4cb3970.setContent(html_ffa4df09663c4e7f944da9a874ab5f78);
+            
+
+            marker_98da4ef6bd5b468ea1151eff7bbc3383.bindPopup(popup_93069c145d1541faa30ec2d5e4cb3970)
+            ;
+
+            
+        
+    
+        var marker_60b126a890124a1ab122f8b8b498ca6c = L.marker(
+            [-30.01, -51.22],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_18ada2092a9846068180c78d06c5dc78 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_e4e36169b0cb446696e060c7b21ba0ed = $(`<div id="html_e4e36169b0cb446696e060c7b21ba0ed" style="width: 100.0%; height: 100.0%;">#TwoOfUs  (250330 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>Two Of Us  (76186 tweets)<br>Capitã Marvel  (36367 tweets)<br>Rosário  (33898 tweets)</div>`)[0];
+                popup_18ada2092a9846068180c78d06c5dc78.setContent(html_e4e36169b0cb446696e060c7b21ba0ed);
+            
+
+            marker_60b126a890124a1ab122f8b8b498ca6c.bindPopup(popup_18ada2092a9846068180c78d06c5dc78)
+            ;
+
+            
+        
+    
+        var marker_c1da39ad542b4339a710ffbc8f80f69d = L.marker(
+            [-23.55, -46.64],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_1ab6f07d84e24785bcc22310ab47ccae);
+        
+    
+            var popup_9f90639132a94de9b5df4b6c91020eca = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_58d8855bde2c4807943a42a220397a16 = $(`<div id="html_58d8855bde2c4807943a42a220397a16" style="width: 100.0%; height: 100.0%;">Presidente  (1198770 tweets)<br>#BolsonaroTemRazão  (532196 tweets)<br>Mangueira  (421604 tweets)<br>#ImpeachmentBolsonaro  (199921 tweets)<br>#WorldBookDay  (95965 tweets)<br>#CaptainMarvel  (93600 tweets)<br>Michael Jordan  (86696 tweets)<br>#goldenshowerpresident  (76519 tweets)</div>`)[0];
+                popup_9f90639132a94de9b5df4b6c91020eca.setContent(html_58d8855bde2c4807943a42a220397a16);
+            
+
+            marker_c1da39ad542b4339a710ffbc8f80f69d.bindPopup(popup_9f90639132a94de9b5df4b6c91020eca)
+            ;
+
+            
+        
+</script>

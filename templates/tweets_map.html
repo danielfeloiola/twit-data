@@ -6,7 +6,10 @@
 
 {% block main %}
     <div id="mapa">
-        <iframe src="/tweets_map_renderer" height=100% width=100%>
+
+        <iframe src="{{url_for('static', filename="mp_tweets.html" )}}" height=100% width=100%>
         </iframe>
     </div>
 {% endblock %}
+
+<iframe src="/tweets_map_renderer" height=100% width=100%>
