@@ -34,7 +34,7 @@ def hashtag_map(hashtag):
     '''Faz um mapa mostrando onde hashtags foram usadas'''
 
     #pega a id do usuario
-    id = session["user_id"]
+    #id = session["user_id"]
 
     # Cria o mapa
     #session['mp_hashtags'] = folium.Map(location=[-12, -49], zoom_start=4)
@@ -102,7 +102,7 @@ def trends_map():
     mp_trends = folium.Map(location=[-12, -49], zoom_start=3)
 
     # Pega a id do usuario
-    id = session["user_id"]
+    #id = session["user_id"]
 
     #cria uma api do twitter
     usr = User.query.filter_by(id=session["user_id"]).first()
@@ -167,7 +167,7 @@ def tweets_map(usuario):
     mp_tweet = folium.Map(location=[-12, -49], zoom_start=4)
 
     # Pega a id do usuario
-    id = session["user_id"]
+    #id = session["user_id"]
 
     #cria uma api do twitter
     usr = User.query.filter_by(id=session["user_id"]).first()
