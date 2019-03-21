@@ -1,16 +1,8 @@
-import os
-from flask import Flask, flash, jsonify, redirect, render_template, request, session, send_file
-from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from flask import Flask, flash, jsonify, redirect, render_template, request, session, send_file
+from application import db
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-db = SQLAlchemy(app)
-
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

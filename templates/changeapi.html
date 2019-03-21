@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Registrar
+{% endblock %}
+
+{% block main %}
+    <form action="/changeapi" method="post">
+
+        <div class="form-group">
+            <input class="form-control" name="consumer_key" placeholder="Consumer Key" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="consumer_secret" placeholder="Consumer Secret" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="access_token" placeholder="Access Token" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="access_secret" placeholder="Access Token Secret" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Mudar API</button>
+    </form>
+{% endblock %}

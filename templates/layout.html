@@ -20,7 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
+        <script src="static/drop.js"></script>
 
         <title>TwitData: {% block title %}{% endblock %}</title>
 
@@ -46,7 +46,17 @@
                         <li class="nav-item"><a class="nav-link" href="/trends">Trends</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                        <div class="dropdown">
+                            <li class="nav-item">
+                                <button onclick="myFunction()" class="dropbtn">Olá, {{ session["username"] }}</button>
+                                <!-- <button onclick="myFunction()" class="dropbtn"> Olá, {{ session["username"] }}</button> -->
+                            </li>
+                                <div id="myDropdown" class="dropdown-content" >
+                                    <li class="nav-item"><a class="nav-link" href="/changeapi">Mudar API</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/changepassword">Mudar Senha</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                                </div>
+                        </div>
                     </ul>
                 {% else %}
                     <ul class="navbar-nav ml-auto mt-2">

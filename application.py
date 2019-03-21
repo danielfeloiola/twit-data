@@ -7,9 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from usr import User
 from helpers import apology, login_required
-from mappers import hashtag_map, trends_map, tweets_map, nuvem_de_palavras
 
 
 # Configure application
@@ -37,8 +35,14 @@ db = SQLAlchemy(app)
 app.config['SECRET_KEY'] = "shdulhdkj48fslu45jvkawinveohlf"
 
 
+# makes a user class for the database
+from user import User
+from mappers import hashtag_map, trends_map, tweets_map, nuvem_de_palavras
+
+
+
 @app.route("/")
-@login_required
+#@login_required
 def index():
     """Show the main page with instructions"""
     return render_template("index.html")
@@ -60,7 +64,17 @@ def tweets():
 @app.route("/check", methods=["GET"])
 def check():
     """Return true if username available, else false, in JSON format"""
-    return jsonify("TODO")
+
+    # check if username is available
+    username = request.args.get('username')
+    check_username = User.query.filter_by(username=username).first()
+
+    # warns the user if it is - or not
+    if not check_username:
+        print('it is true! ')
+        return jsonify(True)
+    else:
+        return jsonify(False)
 
 
 @app.route("/trends")
@@ -68,11 +82,14 @@ def check():
 def trends():
     """Show map with local trending topics"""
 
+    #tries to generate the map, warns the user if there is a err 88
     try:
         trends_map()
-    except tweepy.TweepError:
-        return apology("Twitter Error")
+    except tweepy.TweepError as e:
+        if e.response.text[51:-3] == '88':
+            return apology("API Error 88")
 
+    # if all go well generate the map
     return render_template("trends.html")
 
 
@@ -95,12 +112,14 @@ def login():
             return apology("must provide password", 403)
 
         # query database to check if user exists
-        usr = User.query.filter_by(username=request.form.get("username")).first()
-        x = usr.check_password(request.form.get("password"))
+        user = User.query.filter_by(username=request.form.get("username")).first()
+        password_check = user.check_password(request.form.get("password"))
 
         # if the passwords match, do the login
-        if x == True:
-            session["user_id"] = usr.id
+        if password_check == True:
+            session["user_id"] = user.id
+            session["username"] = user.username
+            #session["user_id"] = user.username
         else:
             return apology("invalid username and/or password", 403)
 
@@ -162,6 +181,10 @@ def register():
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
+         # Ensure passwords match
+        if request.form.get("password") != request.form.get("confirmation"):
+            return apology("Passwords don't match", 403)
+
         # check API consumer key
         if not request.form.get("consumer_key"):
             return apology("Check Consumer Key", 403)
@@ -178,10 +201,6 @@ def register():
         if not request.form.get("access_secret"):
             return apology("Check Access Secret", 403)
 
-        # Ensure passwords match
-        if request.form.get("password") != request.form.get("confirmation"):
-            return apology("Passwords don't match", 403)
-
         # encrypt passwprd
         hash_password = generate_password_hash(request.form.get("password"))
 
@@ -195,24 +214,26 @@ def register():
         a_secret = request.form.get("access_secret")
 
         # query to check if the username already exists
-        usern = User.query.filter_by(username=request.form.get("username")).first()
+        username_query = User.query.filter_by(username=request.form.get("username")).first()
 
         # if its a unique udername add user to database, if its not generate error
-        if not usern:
+        if not username_query:
             new_user = User(username, hash_password, c_key, c_secret, a_token, a_secret)
             db.session.add(new_user)
             db.session.commit()
         else:
             return apology("username already exists", 403)
 
-        # query again for login
-        usr = User.query.filter_by(username=request.form.get("username")).first()
-        x = usr.check_password(request.form.get("password"))
+        # query database to check if user exists
+        user = User.query.filter_by(username=request.form.get("username")).first()
+        password_check = user.check_password(request.form.get("password"))
 
-        # do the login chacking for password
-        if x == True:
-            # Remember which user has logged in
-            session["user_id"] = usr.id
+        # if the passwords match, do the login
+        if password_check == True:
+            session["user_id"] = user.id
+            session["username"] = user.username
+        else:
+            return apology("invalid username and/or password", 403)
 
         # Redirect user to home page
         return redirect("/")
@@ -247,6 +268,89 @@ def hashtags():
         return render_template("hashtag_form.html")
 
 
+@app.route("/changepassword", methods=["GET", "POST"])
+@login_required
+def changepassword():
+    """Change the users password"""
+
+    if request.method == "POST":
+
+        # Get the passwords
+        current_password = request.form.get("current-password")
+        new_password = request.form.get("new-password")
+        new_password_check = request.form.get("new-password-check")
+
+        # check if user has provided the password
+        if not request.form.get("new-password"):
+            return apology("must provide a new password", 403)
+
+        # check if new passwords match
+        if new_password != new_password_check:
+            return apology("New passwords don't match", 403)
+
+        # find the user in the database
+        user = User.query.filter_by(id=session["user_id"]).first()
+        check_pw = user.check_password(request.form.get("current-password"))
+
+        # if the current password provided is correct
+        if check_pw == True:
+
+            # encrypt new pw
+            user.hashp = generate_password_hash(request.form.get("new-password"))
+
+            # add to database
+            db.session.add(user)
+            db.session.commit()
+
+        return redirect("/")
+
+    # if the user is looking for the form
+    else:
+        return render_template("changepassword.html")
+
+
+@app.route("/changeapi", methods=["GET", "POST"])
+@login_required
+def changeapi():
+    """Change the users api keys"""
+
+    if request.method == "POST":
+
+        # find the user in the database
+        user = User.query.filter_by(id=session["user_id"]).first()
+
+        # check if user has provided all the keys
+        if not request.form.get("consumer_key"):
+            return apology("Check Consumer Key", 403)
+
+        # check API consumer secret
+        if not request.form.get("consumer_secret"):
+            return apology("Check Consumer Secret", 403)
+
+        # check API access token
+        if not request.form.get("access_token"):
+            return apology("Check Access Token", 403)
+
+        # check API access secret
+        if not request.form.get("access_secret"):
+            return apology("Check Access Secret", 403)
+
+        # Get the new keys
+        user.c_key = request.form.get("consumer_key")
+        user.c_secret = request.form.get("consumer_secret")
+        user.a_token = request.form.get("access_token")
+        user.a_secret = request.form.get("access_secret")
+
+        # add to database
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect("/")
+
+    # if the user is looking for the form
+    else:
+        return render_template("changeapi.html")
+
 def errorhandler(e):
     """Handle error"""
     if not isinstance(e, HTTPException):
@@ -258,88 +362,3 @@ for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
 
 
-#######
-#app.config["SESSION_FILE_DIR"] = mkdtemp()
-#app.config["SESSION_PERMANENT"] = False
-#app.config["SESSION_TYPE"] = "filesystem"
-
-
-#from tempfile import mkdtemp
-
-#import requests
-#import urllib.parse
-#from tempfile import mkdtemp
-
-
-
-#import branca
-#import collections
-#from operator import itemgetter
-#from folium import IFrame
-#from wordcloud import WordCloud
-#import matplotlib.pyplot as plt
-#import folium
-#import re
-#from functools import wraps
-
-#from setup import list_capitais, list_coordenadas, list_woeids
-
-
-# Configure session to use filesystem (instead of signed cookies)
-#app.config["SESSION_FILE_DIR"] = mkdtemp()
-#app.config["SESSION_PERMANENT"] = False
-#app.config["SESSION_TYPE"] = "filesystem"
-#app.config["SESSION_TYPE"] = "sqlalchemy"
-
-#app.secret_key = "shdulhdkj48fslu45jvka7wfdnu126eohfsylf"
-#Session(app)
-
-
-
-
-# Creates a class for the sqlalchemy database
-
-####################################################################################################################################
-
-
-
-####################################################################################################################################
-
-
-
-
-##################################
-# PRECISA SER ARMAZENADO USANDO session['mapa_coisa']
-#cria os mapas
-#session['mp_tweet'] = folium.Map(location=[-12, -49], zoom_start=4)
-#session['mp_hashtags'] = folium.Map(location=[-12, -49], zoom_start=4)
-#session['mp_trends'] = folium.Map(location=[-12, -49], zoom_start=3)
-
-
-# Render functions
-#@app.route("/mapatrends")
-#@login_required
-#def mapatrends():
-#    """Render map"""
-#
-#    return mp_trends.get_root().render()
-#    # return session['mp_trends'].get_root().render()
-#
-#@app.route("/tweets_map_renderer")
-#@login_required
-#def tweets_map_renderer():
-#    """Render map"""
-#
-#    return mp_tweet.get_root().render()
-#    # return session['mp_tweet'].get_root().render()
-#
-#@app.route("/hastag_map_render")
-#@login_required
-#def hastag_map_render():
-#    """Render Map"""
-#
-#    return mp_hashtags.get_root().render()
-#    #return session['mp_hashtags'].get_root().render()
-#
-#
-#, mp_tweet
