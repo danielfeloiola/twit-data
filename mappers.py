@@ -120,7 +120,7 @@ def trends_map():
 
         html_list = []
 
-        for j in range(45):
+        for j in range(49):
             html_list.append('<div style="font-family: sans-serif; font-size: 12px; line-height: 1.3em;">'
                              + trends[j][0] + '  (' + str(trends[j][1]) + ') ' + '</div>')
 
