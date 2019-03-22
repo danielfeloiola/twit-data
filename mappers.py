@@ -86,56 +86,56 @@ def trends_map(place):
     if place == 'canada':
 
         # pega as cidades
-        from canada import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        from cidades.canada import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
         # faz um mapa
         mp_trends = folium.Map(location=[60, -100], zoom_start=3)
 
     elif place == 'uk':
 
         # pega as cidades
-        from uk import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        from cidades.uk import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
         # faz um mapa
         mp_trends = folium.Map(location=[55, -2], zoom_start=5)
 
     elif place == 'americalatina':
 
         # pega as cidades
-        from americalatina import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        from cidades.americalatina import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
         # faz um mapa
         mp_trends = folium.Map(location=[-10, -70], zoom_start=3)
 
     elif place == 'europa':
 
         # pega as cidades
-        from europa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        from cidades.europa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
         # faz um mapa
         mp_trends = folium.Map(location=[48, 8], zoom_start=3)
 
     elif place == 'asia':
 
         # pega as cidades
-        from asia import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        from cidades.asia import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
         # faz um mapa
         mp_trends = folium.Map(location=[2, 100], zoom_start=2)
 
     elif place == 'africa':
 
         # pega as cidades
-        from africa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        from cidades.africa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
         # faz um mapa
         mp_trends = folium.Map(location=[5, 22], zoom_start=3)
 
     elif place == 'easteuropemiddleeast':
 
         # pega as cidades
-        from easteuropemiddleeast import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        from cidades.easteuropemiddleeast import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
         # faz um mapa
         mp_trends = folium.Map(location=[40, 40], zoom_start=3)
 
     elif place == 'usa':
 
         # pega as cidades
-        from usa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        from cidades.usa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
         # faz um mapa
         mp_trends = folium.Map(location=[50, -95], zoom_start=3)
 
