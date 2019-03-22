@@ -13,8 +13,7 @@ from flask import Flask, flash, request, session
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 
-# importa definicoes de outros arquivos da mesma pasta
-from cidades import list_capitais, list_coordenadas, list_woeids
+#importa definicoes de usuario
 from user import User
 
 
@@ -73,13 +72,74 @@ def hashtag_map(hashtag):
     mp_hashtags.save(outfile = "static/mp_hashtags.html")
 
 
-def trends_map():
+def trends_map(place):
     ''' Mostra trending topics locais '''
+    # GET A COUNTRY ID (?) FROM PAGE
+    # USE COUNTRY ID TO LOAD LIST OF CITIES
+    ###
+    lista_de_capitais = []
+    lista_de_coordenadas = []
+    lista_de_woeids = []
 
-    # Cria um mapa
-    mp_trends = folium.Map(location=[-12, -49], zoom_start=3)
 
-    #cria uma api do twitter
+    # lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+    if place == 'canada':
+
+        # pega as cidades
+        from canada import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        # faz um mapa
+        mp_trends = folium.Map(location=[60, -100], zoom_start=3)
+
+    elif place == 'uk':
+
+        # pega as cidades
+        from uk import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        # faz um mapa
+        mp_trends = folium.Map(location=[55, -2], zoom_start=5)
+
+    elif place == 'americalatina':
+
+        # pega as cidades
+        from americalatina import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        # faz um mapa
+        mp_trends = folium.Map(location=[-10, -70], zoom_start=3)
+
+    elif place == 'europa':
+
+        # pega as cidades
+        from europa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        # faz um mapa
+        mp_trends = folium.Map(location=[48, 8], zoom_start=3)
+
+    elif place == 'asia':
+
+        # pega as cidades
+        from asia import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        # faz um mapa
+        mp_trends = folium.Map(location=[2, 100], zoom_start=2)
+
+    elif place == 'africa':
+
+        # pega as cidades
+        from africa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        # faz um mapa
+        mp_trends = folium.Map(location=[5, 22], zoom_start=3)
+
+    elif place == 'easteuropemiddleeast':
+
+        # pega as cidades
+        from easteuropemiddleeast import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        # faz um mapa
+        mp_trends = folium.Map(location=[40, 40], zoom_start=3)
+
+    elif place == 'usa':
+
+        # pega as cidades
+        from usa import lista_de_capitais, lista_de_coordenadas, lista_de_woeids
+        # faz um mapa
+        mp_trends = folium.Map(location=[50, -95], zoom_start=3)
+
+    # cria uma api do twitter
     usr = User.query.filter_by(id=session["user_id"]).first()
 
     consumer_key = usr.c_key
@@ -93,14 +153,14 @@ def trends_map():
 
 
     # itera sobre as capitais pegando os trends de cada uma
-    contador = len(list_capitais)
+    contador = len(lista_de_capitais)
 
     for i in range(contador):
 
         trends = []
 
         # pede os trends
-        status_list = api.trends_place(list_woeids[i])
+        status_list = api.trends_place(lista_de_woeids[i])
 
         # tira eles de dentro de uma lista dentro de um dicionario
         trending = status_list[0]
@@ -120,9 +180,9 @@ def trends_map():
 
         html_list = []
 
-        for j in range(49):
+        for j in trends:
             html_list.append('<div style="font-family: sans-serif; font-size: 12px; line-height: 1.3em;">'
-                             + trends[j][0] + '  (' + str(trends[j][1]) + ') ' + '</div>')
+                             + j[0] + '  (' + str(j[1]) + ') ' + '</div>')
 
         html_popup = ''.join(html_list)
 
@@ -132,7 +192,7 @@ def trends_map():
         popup = folium.Popup(iframe, parse_html=True)#, max_width=370
 
         # adiciona um marcador com o popup ao mapa
-        folium.Marker(list_coordenadas[i], popup = popup).add_to(mp_trends) #add_to(m)
+        folium.Marker(lista_de_coordenadas[i], popup = popup).add_to(mp_trends) #add_to(m)
 
     # Salva o mapa em um arquivo
     mp_trends.save(outfile = "static/mp_trends.html")

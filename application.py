@@ -77,20 +77,26 @@ def check():
         return jsonify(False)
 
 
-@app.route("/trends")
+@app.route("/trends", methods=["GET", "POST"])
 @login_required
 def trends():
     """Show map with local trending topics"""
 
-    #tries to generate the map, warns the user if there is a err 88
-    try:
-        trends_map()
-    except tweepy.TweepError as e:
-        if e.response.text[51:-3] == '88':
-            return apology("API Error 88")
+    if request.method == "POST":
 
-    # if all go well generate the map
-    return render_template("trends.html")
+        place = request.form.get("selector")
+        #tries to generate the map, warns the user if there is a err 88
+        try:
+            trends_map(place)
+        except tweepy.TweepError as e:
+            if e.response.text[51:-3] == '88':
+                return apology("API Error 88")
+
+        # if all go well generate the map
+        return render_template("trends.html")
+
+    else:
+        return render_template("trends_form.html")
 
 
 @app.route("/login", methods=["GET", "POST"])

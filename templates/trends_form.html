@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Trends
+{% endblock %}
+
+{% block main %}
+    <form action="/trends" method="post">
+        <div class="form-group">
+            <select name="selector" class="custom-select" style="width: 350px;">
+                <option disabled selected="selected" value="1">Selecione um local</option>
+                <option value="canada">Canadá</option>
+                <option value="uk">Reino Unido</option>
+                <option value="americalatina">América do Sul e Central</option>
+                <option value="europa">Europa</option>
+                <option value="asia">Asia e Oceania</option>
+                <option value="africa">Africa</option>
+                <option value="easteuropemiddleeast">Europa Oriental e Oriente Médio</option>
+                <option disabled value="usa">Estados Unidos</option>
+
+            </select>
+
+        </div>
+
+        <button class="btn btn-primary" type="submit">Pesquisar</button>
+    </form>
+{% endblock %}
