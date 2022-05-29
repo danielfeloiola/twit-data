@@ -160,7 +160,7 @@ def trends_map(place):
         trends = []
 
         # pede os trends
-        status_list = api.trends_place(lista_de_woeids[i])
+        status_list = api.get_place_trends(lista_de_woeids[i])
 
         # tira eles de dentro de uma lista dentro de um dicionario
         trending = status_list[0]
