@@ -315,7 +315,7 @@ def nuvem_de_palavras(usuario):
     nuvem = "static/nuvem.png"
 
     # info_do_perfil do usuario:
-    consulta_api = api.get_user(usuario)._json
+    consulta_api = api.get_user(screen_name=usuario)._json
     nome = consulta_api['name']
     descricao = consulta_api['description']
     seguidores = consulta_api['followers_count']
