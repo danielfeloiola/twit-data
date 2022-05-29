@@ -32,7 +32,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 #set up secret key
-app.config['SECRET_KEY'] = "shdulhdkj48fslu45jvkawinveohlf"
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
 
 # makes a user class for the database
