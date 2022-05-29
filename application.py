@@ -94,7 +94,7 @@ def trends():
         #tries to generate the map, warns the user if there is a err 88
         try:
             trends_map(place)
-        except tweepy.error.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             if e.response.text[51:-3] == '88':
                 return apology("API Error 88")
 
@@ -270,7 +270,7 @@ def hashtags():
         # Make a new map
         try:
             hashtag_map(hashtag)
-        except tweepy.error.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             # if there is a tweepy error
             return apology("Twitter Error", e.reason[-3:])
 
