@@ -78,7 +78,6 @@ def check():
 
     # warns the user if it is - or not
     if not check_username:
-        print('it is true! ')
         return jsonify(True)
     else:
         return jsonify(False)
@@ -219,6 +218,7 @@ def register():
 
         # set username
         username = request.form.get("username")
+        print(username)
 
         # get keys
         c_key = request.form.get("consumer_key")

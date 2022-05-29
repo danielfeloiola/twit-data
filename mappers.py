@@ -217,7 +217,7 @@ def tweets_map(usuario):
 
 
     # Busca a timeline do usuario
-    status_list = api.user_timeline(usuario, count=3200, include_rts=False)
+    status_list = api.user_timeline(screen_name=usuario, count=3200, include_rts=False)
 
     # Coleta o dado de cidades embedado em um Tweet
     for status in status_list:
@@ -283,7 +283,7 @@ def nuvem_de_palavras(usuario):
     string = ''
 
     # pega a timeline de um usuário
-    timeline = api.user_timeline(usuario, count=2200, include_rts=False)
+    timeline = api.user_timeline(screen_name=usuario, count=2200, include_rts=False)
 
     # coloca os tweets na lista
     for tweet in timeline:
