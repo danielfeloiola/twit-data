@@ -36,7 +36,7 @@ def hashtag_map(hashtag):
     api = tweepy.API(auth)
 
     # Call API to get the tweets
-    tweets = tweepy.Cursor(api.search, q=hashtag).items(800) #, wait_on_rate_limit=True
+    tweets = tweepy.Cursor(api.search_tweets, q=hashtag).items(800) #, wait_on_rate_limit=True
 
     # esse comentario e completamente inutil
     for tweet in tweets:
